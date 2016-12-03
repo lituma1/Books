@@ -43,7 +43,7 @@ $(function () {
                             e.preventDefault();
                             //alert(data);
                         } else {
-                            //alert('Successfully not posted.');
+                            alert('Successfully not posted.');
                         }
                     }
                 })
@@ -68,9 +68,11 @@ $(function () {
                 if (data) {
                     location.reload();
                     e.preventDefault();
+                    name = '';
+                    author = '';
                     //alert(data);
                 } else {
-                    //alert('Successfully not posted.');
+                    alert('Successfully not posted. Proszę wprowadzić więcej danych');
                 }
             }
         });

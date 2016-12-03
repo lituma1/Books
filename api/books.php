@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo 'successful' . $name . " " . $author;
         $b = new Book();
         $b->create($conn, $name, $author);
-    }
+    } 
 }
 if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 
