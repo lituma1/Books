@@ -1,40 +1,52 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 $(function () {
     console.log('działa');
     var form = $('form');
     $.get('./api/books.php', function (json) {
         console.log(json);
-//        var book = jQuery.parseJSON(json);
-//        console.log(book);
-//        var name = $('<p><b>Tytuł: ' + json.name + '</b></p>');
-//        $('#json').prepend(name);
 
-        //Najpierw zmieniamy json w obiekty javascript 
+        //Najpierw zmieniam json w obiekty javascript 
         $.each(JSON.parse(json), function (index, object) {
-            var name = $('<p><b>Tytuł: ' + object.name + '</b></p>');
+            var name = $('<p><b>Tytuł: ' + object.name + '&nbsp' + '</b></p');
+            var deleteBook = $("<a href='#'>Usuń " + object.name + " z katalogu</a>");
             var id = object.id;
             var div = $('<div>');
+            div.toggle();
             $('#json').append(name);
             $('#json').append(div);
-
-
+            $('#json').append(deleteBook);
+;
             name.click(function () {
                 console.log('klikam');
+                
                 $.get('./api/books.php?id=' + id, function (json) {
                     console.log(json);
                     var object2 = JSON.parse(json);
-//                    console.log(object2.author);
-//                    
-//                    console.log(name.next());
-                    name.next().text(object2.author);
+                    var div = name.next();
+                    div.text("Autor: " + object2.author);
+                    
+                    div.toggle();
 
                 });
+                
+            })
+            deleteBook.click(function () {
+
+                console.log('klikam ' + id);
+                $.ajax({
+                    type: "DELETE",
+                    url: "./api/books.php",
+                    data: {"id": id},
+                    success: function (data) {
+                        if (data) {
+                            location.reload();
+                            e.preventDefault();
+                            //alert(data);
+                        } else {
+                            //alert('Successfully not posted.');
+                        }
+                    }
+                })
             })
 
 
@@ -45,13 +57,13 @@ $(function () {
         e.preventDefault();
 
         var name = $('#inputTitle').val();
-        
+
         var author = $('#inputAuthor').val();
 
-        $.ajax({//create an ajax request to load_page.php
+        $.ajax({
             type: "POST",
             url: "./api/books.php",
-            data: {"name": "" + name, "author": "" + author},
+            data: {"name": name, "author": author},
             success: function (data) {
                 if (data) {
                     location.reload();
@@ -62,11 +74,5 @@ $(function () {
                 }
             }
         });
-
-
-
-
-
-        //});
     });
 })

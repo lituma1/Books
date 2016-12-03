@@ -1,15 +1,9 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 2016-11-25, 16:18:33
-    Author     : pp
-*/
 
 body {
     font-family: Roboto, Helvetica, sans-serif;
-    font-size: 10pt;
+    font-size: 12pt;
     color: #2e2e2e;
+}
+div {
+    margin-bottom: 10px;
 }

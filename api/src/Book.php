@@ -1,12 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-//include_once '../connection.php';
-
 class Book implements JsonSerializable {
 
     private $id;
@@ -80,18 +73,31 @@ class Book implements JsonSerializable {
             return false;
         }
     }
-    function delete($conn){
-        if($this->id !=-1){
-            $sql = "DELETE FROM Book WHERE id=$this->id";
-            $result = $conn->query($sql);
-            if($result){
-                $this->id = -1;
+// Zamiast tej funkcji zastosowałem funkcję statyczną
+//    function delete($conn){
+//        if($this->id !=-1){
+//            $sql = "DELETE FROM Book WHERE id=$this->id";
+//            $result = $conn->query($sql);
+//            if($result){
+//                $this->id = -1;
+//                echo 'rekord usunięty z bazy';
+//                return true;
+//            }
+//            echo 'niepoprawne zapytanie do bazy'. $conn->error;
+//            return false;
+//        }
+//    }
+    static function delete($conn, $id){
+        $sql = "DELETE FROM Book WHERE id=$id";
+        $result = $conn->query($sql);
+            if($result && $result == null){
+               
                 echo 'rekord usunięty z bazy';
                 return true;
             }
-            echo 'niepoprawne zapytanie do bazy'. $conn->error;
+            echo 'niepoprawne zapytanie do bazy lub obiekt o podanym id nieistnieje'. $conn->error;
             return false;
-        }
+        
     }
     static function loadAllBooks($conn){
         $ret = [];
@@ -119,9 +125,4 @@ class Book implements JsonSerializable {
     }
 
 }
-
-//$array = Book::loadAllBooks($conn);
-//var_dump($array);
-
-
 
