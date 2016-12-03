@@ -37,8 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-   if(isset($_POST['data'])){
-    echo 'successful czy to się udało'. $_POST['data'];
+   if(!empty($_POST['name']) && !empty($_POST['author'])){
+       $name = $_POST['name'];
+       $author = $_POST['author'];
+       
+    echo 'successful czy to się udało'. $name . " " . $author;
+    $b = new Book();
+    $b->create($conn, $name, $author);
 }
 //    if (!empty($_POST)) {
 //

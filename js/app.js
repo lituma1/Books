@@ -41,32 +41,32 @@ $(function () {
 
         })
     })
-//    form.on('submit', function (e) {
-//        e.preventDefault();
-//        $.post('./api/books.php', function (json) {
-//            var title = $('#inputTitle').val();
-//            console.log(title);
-//            var author = $('#inputAuthor').val();
-//            var book = {name: title, author: author};
-//            console.log(book);
-//            var json = JSON.stringify(book);
-//            console.log(json);
+    form.on('submit', function (e) {
+        e.preventDefault();
+
+        var name = $('#inputTitle').val();
+        
+        var author = $('#inputAuthor').val();
+
+        $.ajax({//create an ajax request to load_page.php
+            type: "POST",
+            url: "./api/books.php",
+            data: {"name": "" + name, "author": "" + author},
+            success: function (data) {
+                if (data) {
+                    location.reload();
+                    e.preventDefault();
+                    //alert(data);
+                } else {
+                    //alert('Successfully not posted.');
+                }
+            }
+        });
 
 
-    $.ajax({//create an ajax request to load_page.php
-    type: "POST",
-    url: "./api/books.php",
-    data:{"data":"check"},
-    success: function(data) {
-        if (data) {
 
-           alert(data);
-        }
-        else {
-            alert('Successfully not posted.');
-        }
-    }
-});
 
-    //});
-});
+
+        //});
+    });
+})
