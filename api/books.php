@@ -37,17 +37,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!empty($_POST)) {
-
-        $book = json_decode();
-        //var_dump($book);
-        $name = $book->name;
-        $author = $book->author;
-        echo $name . '<br>';
-        echo $author . '<br>';
-        $b = new Book();
-        $b->create($conn, $name, $author);
-    }
+   if(isset($_POST['data'])){
+    echo 'successful czy to się udało'. $_POST['data'];
+}
+//    if (!empty($_POST)) {
+//
+//        $book = json_decode();
+//        //var_dump($book);
+//        $name = $book->name;
+//        $author = $book->author;
+//        echo $name . '<br>';
+//        echo $author . '<br>';
+//        $b = new Book();
+//        $b->create($conn, $name, $author);
+//    }
 }
 
 ?>
