@@ -10,6 +10,7 @@
 include_once 'src/Book.php';
 include_once 'connection.php';
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+   
 //    $sql = "SELECT id FROM Book";
 //    $res = $conn->query($sql);
 //    if($res && $res->num_rows > 0){
@@ -35,4 +36,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo $json;
     }
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!empty($_POST)) {
+
+        $book = json_decode();
+        //var_dump($book);
+        $name = $book->name;
+        $author = $book->author;
+        echo $name . '<br>';
+        echo $author . '<br>';
+        $b = new Book();
+        $b->create($conn, $name, $author);
+    }
+}
+
 ?>

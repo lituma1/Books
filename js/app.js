@@ -7,6 +7,7 @@
 
 $(function () {
     console.log('działa');
+    var form = $('form');
     $.get('./api/books.php', function (json) {
        console.log(json);
 //        var book = jQuery.parseJSON(json);
@@ -40,25 +41,20 @@ $(function () {
             
         })
     })
-    var p = $('div');
-    console.log(p);
+    form.on('submit', function (e) {
+        e.preventDefault();
+        $.post('./api/books.php', function (json) {
+            var title = $('#inputTitle').val();
+            console.log(title);
+            var author = $('#inputAuthor').val();
+            var book = {name: title, author: author};
+            console.log(book);
+            var json = JSON.stringify(book);
+            console.log(json);
 
-//   $('button').click(function() {
-//
-//          $.get('http://date.jsontest.com/', function(json) {
-//            console.log(json);
-//
-//              var czas = $('<p><b>Czas: ' + json.time + '</b></p>');
-//              var timestamp = $('<p><b>timestamp:</b> ' + json.milliseconds_since_epoch + '</p>');
-//              var data = $('<p><b>Data:</b> ' + json.date + '<p>');
-//
-//              $('div#json').empty();
-//              $('div#json').prepend(czas);
-//              $('div#json').prepend(timestamp);
-//              $('div#json').prepend(data);
-//
-//          });
-//
-//    });
+    });
 
+
+
+});
 });
